@@ -48,7 +48,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: const TextStyle(color: Colors.white),
+        ),
       ),
       body: Center(
         child: Column(
@@ -111,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           (route) => true);
     } else {
-      Navigator.pushAndRemoveUnti l(
+      Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const NotFound()),
           (route) => true);
