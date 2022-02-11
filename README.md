@@ -1,16 +1,20 @@
-# recipe_app
+# Tasty Recipes
 
-A new Flutter project.
+Search for recipes, view them and share it via all your social media apps!
 
-## Getting Started
+ <p float="left">
 
-This project is a starting point for a Flutter application.
+  <img src="images/mainscreen.jpeg" width="250" title="Home screen">
+  <img src="images/recipelist.jpeg" width="250" title="List of Recipes">
+  <img src="images/recipescreen.jpeg" width="250" title="Recipe Screen">
 
-A few resources to get you started if this is your first Flutter project:
+</p>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+This was done using [Edamam Recipe API](https://developer.edamam.com/edamam-recipe-api).
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Get an API key, add it to a config.dart in lib/ as shown and see the app running
+
+```
+YOUR_APP_ID = "the app ID"
+YOUR_APP_KEY = "your app key"
+```
