@@ -26,7 +26,7 @@ class _SecondPageState extends State<SecondPage> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          "Recipes on ${widget.appBarTitle}",
+          "Recipes on \"${widget.appBarTitle}\" ",
           style: const TextStyle(color: Colors.white),
         ),
       ),

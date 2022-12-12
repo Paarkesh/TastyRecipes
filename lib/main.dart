@@ -1,11 +1,18 @@
 import 'dart:convert';
-
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:recipe_app/recipe_json.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_app/screens/not_found.dart';
 import 'package:recipe_app/screens/second_page.dart';
+import 'package:recipe_app/screens/calculator.dart';
+import 'package:recipe_app/screens/geolocation.dart';
+import 'package:recipe_app/screens/shapes.dart';
+import 'package:recipe_app/screens/alarm.dart';
+import 'package:recipe_app/screens/alert.dart';
+import 'package:recipe_app/screens/accel.dart';
+import 'package:recipe_app/screens/themes.dart';
 
 import 'config.dart';
 
@@ -23,12 +30,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Recipe App',
+      title: 'Fooder App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
-      home: const MyHomePage(title: 'Recipe App'),
+      home: const MyHomePage(title: 'Fooder App'),
     );
   }
 }
@@ -48,17 +55,140 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           widget.title,
-          style: const TextStyle(color: Colors.white),
+          style: GoogleFonts.sriracha(
+            fontStyle: FontStyle.italic,
+            color: Colors.white,
+            fontSize: 25,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const SizedBox(
+              height: 100,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                ),
+                child: Text(
+                  'Miscellaneous',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              // ignore: prefer_const_constructors
+              leading: Icon(
+                Icons.calculate,
+              ),
+              title: const Text('Calculator'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (ctxt) => const SecondRoute()),
+                );
+              },
+            ),
+            ListTile(
+              // ignore: prefer_const_constructors
+              leading: Icon(
+                Icons.pentagon,
+              ),
+              title: const Text('Shapes'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (ctxt) => const ThirdRoute()),
+                );
+              },
+            ),
+            ListTile(
+              // ignore: prefer_const_constructors
+              leading: Icon(
+                Icons.pin_drop,
+              ),
+              title: const Text('Geolocation'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (ctxt) => const FourthRoute()),
+                );
+              },
+            ),
+            ListTile(
+              // ignore: prefer_const_constructors
+              leading: Icon(
+                Icons.alarm,
+              ),
+              title: const Text('Alarm Clock'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (ctxt) => const FifthRoute()),
+                );
+              },
+            ),
+            ListTile(
+              // ignore: prefer_const_constructors
+              leading: Icon(
+                Icons.message,
+              ),
+              title: const Text('Alert Box'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (ctxt) => const SixthRoute()),
+                );
+              },
+            ),
+            ListTile(
+              // ignore: prefer_const_constructors
+              leading: Icon(
+                Icons.speed,
+              ),
+              title: const Text('Accelerometer'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (ctxt) => const SeventhRoute()),
+                );
+              },
+            ),
+            ListTile(
+              // ignore: prefer_const_constructors
+              leading: Icon(
+                Icons.format_paint,
+              ),
+              title: const Text('Themes'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (ctxt) => const EighthRoute()),
+                );
+              },
+            ),
+          ],
         ),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            const SizedBox(
+              height: 20,
+            ),
             Container(
-              margin: const EdgeInsets.only(left: 16.0),
+              margin: const EdgeInsets.only(left: 15.0, right: 4.0),
               child: TextFormField(
                   textInputAction: TextInputAction.go,
                   controller: ingredientController,
@@ -69,28 +199,27 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      hintText: "Enter the ingredient",
+                      hintText: "Search Recipes,Cuisines,Ingredients...",
                       suffixIcon: IconButton(
                           icon: const Icon(Icons.search),
                           onPressed: () {
                             getData(ingredientController.text);
                           }))),
             ),
-            Text(
-              "Let's Go",
-              style: Theme.of(context).textTheme.headline4,
+            SizedBox(
+              height: 10,
             ),
-            IconButton(
-              icon: const Icon(Icons.search),
-              iconSize: 50,
-              color: Colors.amber,
-              splashColor: Colors.amber,
-              onPressed: () {
-                getData(ingredientController.text);
-              },
-            ),
+            Container(
+              // height: MediaQuery.of(context).size.height * .6,
+              child: Image.asset(
+                "assets/images/logo-color.png",
+                height: MediaQuery.of(context).size.height * .6,
+              ),
+            )
           ],
         ),
+        // ignore: avoid_unnecessary_containers
+        //child: Image.asset("assets/images/logo-color.png"),
       ),
     );
   }
@@ -122,6 +251,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   String makeURL(String ing) {
-    return "https://api.edamam.com/api/recipes/v2?type=public&q=$ing&app_id=$YOUR_APP_ID&app_key=$YOUR_APP_KEY";
+    return "https://api.edamam.com/api/recipes/v2?type=public&q=$ing&app_id=$appId&app_key=$appKey";
   }
 }
