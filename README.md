@@ -14,7 +14,7 @@ Search for recipes, view them and share it via all your social media apps!
 ## How to use?
 Clone this repository
 ```
-git clone https://github.com/lakshmi-warrier/TastyRecipes.git
+git clone https://github.com/Paarkesh/TastyRecipes.git
 ```
 
 Open this repository in your favourite editor.
